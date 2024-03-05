@@ -16,6 +16,7 @@
     "@fortawesome/pro-regular-svg-icons": "^6.5.1",
     "@fortawesome/pro-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "axios": "^1.6.7",
     "next": "14.1.1",
     "react": "^18",
     "react-dom": "^18"

@@ -4,14 +4,27 @@ import { faHouse, faMagnifyingGlass } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LibraryIconSvg from "./svg/LibraryIconSvg";
 import { faPlus } from "@fortawesome/pro-solid-svg-icons";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getCategories } from "@/services/getAllCategories";
+import { Categories } from "@/types/Categories";
 
 const NavBar = () => {
   const [clickedIconPlus, setClickedIconPlus] = useState(false);
+  const [categories, setCategories] = useState<Categories["items"]>();
 
   function onClickIconPlus() {
     setClickedIconPlus(!clickedIconPlus);
   }
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const categoriesData = await getCategories();
+      if (categoriesData) {
+        setCategories(categoriesData);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   const navItems: Navigation[] = [
     {
@@ -58,6 +71,32 @@ const NavBar = () => {
               onClick={onClickIconPlus}
             />
           </div>
+        </div>
+      </div>
+      <div className="mx-4 mt-2 bg-[#121212] rounded-xl">
+        <div className="pl-5 py-3 flex items-center justify-between">
+          {categories ? (
+            <ul className="text-gray-400">
+              {categories.map((category) => (
+                <li
+                  key={category.id}
+                  className="flex items-center text-lg gap-3 my-4 cursor-pointer hover:text-white transition-all duration-300"
+                >
+                  {category.icons.map((icon, index) => (
+                    <img
+                      key={index}
+                      src={icon.url}
+                      alt={`Icone pour ${category.name}`}
+                      className="w-12 object-cover h-fit"
+                    />
+                  ))}
+                  {category.name}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Erreur dans la récupération des données</p>
+          )}
         </div>
       </div>
     </div>
