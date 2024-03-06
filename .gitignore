@@ -13,7 +13,8 @@
 /.next/
 /out/
 .npmrc
-
+.env
+spotify-clone-8261d-firebase-adminsdk-enq8m-30048fdccc.json
 # production
 /build
 

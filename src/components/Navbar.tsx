@@ -1,12 +1,17 @@
 "use client";
 import { Navigation } from "@/types/Navigation";
-import { faHouse, faMagnifyingGlass } from "@fortawesome/pro-regular-svg-icons";
+import {
+  faHouse,
+  faMagnifyingGlass,
+  faRightToBracket,
+} from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LibraryIconSvg from "./svg/LibraryIconSvg";
 import { faPlus } from "@fortawesome/pro-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { getCategories } from "@/services/getAllCategories";
 import { Categories } from "@/types/Categories";
+import Link from "next/link";
 
 const NavBar = () => {
   const [clickedIconPlus, setClickedIconPlus] = useState(false);
@@ -73,7 +78,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="mx-4 mt-2 bg-[#121212] rounded-xl">
+      <div className="mx-4 my-7 bg-[#121212] rounded-xl">
         <div className="pl-5 py-3 flex items-center justify-between">
           {categories ? (
             <ul className="text-gray-400">
@@ -97,6 +102,28 @@ const NavBar = () => {
           ) : (
             <p>Erreur dans la récupération des données</p>
           )}
+        </div>
+      </div>
+      <div className="mx-4 bg-[#121212] mt-2 mb-2 rounded-xl">
+        <div className="pl-5 py-3  cursor-pointer">
+          <div className="flex items-center gap-3">
+            <FontAwesomeIcon
+              icon={faRightToBracket}
+              className="w-5 mr-4 cursor-pointer text-gray-400"
+            />
+            <p className="text-gray-400  font-medium">
+              <span className="hover:text-white transition-all duration-300 ease-out">
+                Login
+              </span>{" "}
+              /
+              <Link href="/signup">
+                <span className="hover:text-white transition-all duration-300 ease-out">
+                  {" "}
+                  Sign up
+                </span>
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
