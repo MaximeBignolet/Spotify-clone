@@ -18,8 +18,12 @@ export default function Signup() {
       return console.log(error);
     }
 
-    console.log(result);
-    return router.push("/");
+    if (result?.user) {
+      const token = await result.user.getIdTokenResult();
+      document.cookie = `token=${token.token};`;
+      console.log(token.token);
+      return router.push("/");
+    }
   };
 
   return (
