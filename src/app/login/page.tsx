@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
-import signUp from "@/firebase/auth/signup";
+import signIn from "@/firebase/auth/signin";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ export default function Signup() {
   const handleForm = async (event: any) => {
     event.preventDefault();
 
-    const { result, error } = await signUp(email, password);
+    const { result, error } = await signIn(email, password);
 
     if (error) {
       return console.log(error);
@@ -20,9 +20,8 @@ export default function Signup() {
 
     if (result?.user) {
       const token = result.user.uid;
-
       setCookie("token", token);
-      return router.push("/signup/profil");
+      return router.push("/");
     }
   };
 
@@ -30,7 +29,7 @@ export default function Signup() {
     <div className="h-screen w-screen bg-[#121212] flex justify-center items-center">
       <div className="text-white flex justify-center items-center flex-col w-1/3 container mx-auto">
         <h1 className="text-4xl text-center leading-10 font-bold">
-          Inscrivez-vous pour commencer à écouter
+          Connectez-vous
         </h1>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className=" py-8 px-4 shadow sm:rounded-lg sm:px-10">
