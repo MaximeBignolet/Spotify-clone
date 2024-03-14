@@ -54,7 +54,7 @@ const NavBar = () => {
       }
     }
     fetchCategories();
-  });
+  }, []);
 
   const navItems: Navigation[] = [
     {
@@ -80,8 +80,10 @@ const NavBar = () => {
               className="text-gray-400 flex items-center cursor-pointer font-medium gap-3 hover:text-white transition-all duration-300 ease-out"
               key={item.id}
             >
-              <li className="w-5">{item.icon}</li>
-              <li>{item.name}</li>
+              <Link href={item.path} className="flex gap-3 items-center">
+                <li className="w-5">{item.icon}</li>
+                <li>{item.name}</li>
+              </Link>
             </ul>
           ))}
         </nav>
@@ -139,6 +141,12 @@ const NavBar = () => {
                   className="w-5 mr-4 cursor-pointer text-gray-400"
                 />
               </div>
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-gray-500">
+                <span className="text-xs font-medium leading-none text-white">
+                  {firstname.substring(1, 0)}
+                  {name.substring(1, 0)}
+                </span>
+              </span>
               <p className="text-gray-400  font-medium">
                 <span className="hover:text-white transition-all duration-300 ease-out">
                   {firstname} {name}
